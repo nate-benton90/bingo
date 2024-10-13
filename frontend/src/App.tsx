@@ -22,11 +22,9 @@ const App = () => {
   const handleLogin = async () => {
     try {
       const response = await axios.post(`${apiBaseUrl}/api/users/login`, { username, password });
-      console.log("Login response:", response);  // Add this line to check response
       localStorage.setItem('token', response.data.token);
-      setIsLoggedIn(true);
+      setIsLoggedIn(true);  // Set logged-in state
     } catch (err) {
-      console.error("Login error:", err);  // Add this line to log any error
       alert('Invalid credentials');
     }
   };
@@ -35,22 +33,39 @@ const App = () => {
     <Router>
       <Switch>
         <Route path="/" exact>
-          <div>
-            <h2>Login</h2>
-            <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Username" />
-            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
-            <button onClick={handleLogin}>Login</button>
-            <button onClick={handleRegister}>Register</button>
-          </div>
+          {!isLoggedIn ? ( 
+            <div>
+              <h2>Login</h2>
+              <input
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Username"
+              />
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Password"
+              />
+              <button onClick={handleLogin}>Login</button>
+              <button onClick={handleRegister}>Register</button>
+            </div>
+          ) : (
+            <Redirect to="/capybara" />   // Redirect to Capybara page if logged in
+          )}
         </Route>
-        {isLoggedIn && (
-          <Route path="/capybara">
+        <Route path="/capybara">
+          {isLoggedIn ? (  
             <div>
               <h1>Welcome!</h1>
               <img src="path_to_capybara_image" alt="Capybara" />
             </div>
-          </Route>
-        )}
+          ) : (
+            <Redirect to="/" />   // Redirect to login if not logged in
+          )}
+        </Route>
+        {/* Always redirect to "/" for any undefined route */}
         <Redirect to="/" />
       </Switch>
     </Router>
