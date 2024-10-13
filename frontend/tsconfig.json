@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ES2016",                                // Target modern JavaScript
+    "module": "ESNext",                                // Use ESNext for modules
+    "jsx": "react-jsx",                                // Handle JSX in TypeScript
+    "strict": true,                                    // Enable strict type checking
+    "moduleResolution": "node",                        // Resolve modules as Node.js does
+    "esModuleInterop": true,                           // Enable interoperability for CommonJS modules
+    "skipLibCheck": true,                              // Skip type checking of libraries for faster builds
+    "forceConsistentCasingInFileNames": true,          // Enforce file name casing consistency
+    "baseUrl": "./",                                   // Set base URL to root
+    "paths": { "*": ["src/*"] }                        // Resolve paths from the "src" directory
+  },
+  "include": ["src"]                                   // Include the "src" directory in the build
+}
