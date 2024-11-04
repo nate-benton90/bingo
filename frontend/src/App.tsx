@@ -33,7 +33,7 @@ const App = () => {
     <Router>
       <Switch>
         <Route path="/" exact>
-          {!isLoggedIn ? ( 
+          {!isLoggedIn ? (
             <div>
               <h2>Login</h2>
               <input
@@ -52,19 +52,25 @@ const App = () => {
               <button onClick={handleRegister}>Register</button>
             </div>
           ) : (
-            <Redirect to="/capybara" />   // Redirect to Capybara page if logged in
+            <Redirect to="/capybara" />
           )}
         </Route>
+        
         <Route path="/capybara">
-          {isLoggedIn ? (  
+          {isLoggedIn ? (
             <div>
               <h1>Welcome!</h1>
-              <img src="path_to_capybara_image" alt="Capybara" />
+              <img
+                src="./capy.gif"  // Update this path to match the file location in `public/`
+                alt="Capybara GIF"
+                style={{ width: '300px', height: '300px' }}
+              />
             </div>
           ) : (
-            <Redirect to="/" />   // Redirect to login if not logged in
+            <Redirect to="/" />
           )}
         </Route>
+
         {/* Always redirect to "/" for any undefined route */}
         <Redirect to="/" />
       </Switch>
