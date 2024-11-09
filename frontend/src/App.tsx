@@ -1,31 +1,43 @@
-import { useState } from 'react';
-import axios from 'axios';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { useState } from "react";
+import axios from "axios";
+import CapybaraPage from "./CapybaraPage"; // Corrected import path
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
 
 // Use environment variable for the API base URL
 const apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
 
 const App = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleRegister = async () => {
     try {
-      await axios.post(`${apiBaseUrl}/api/users/register`, { username, password });
-      alert('Registered new user successfully');
+      await axios.post(`${apiBaseUrl}/api/users/register`, {
+        username,
+        password,
+      });
+      alert("Registered new user successfully");
     } catch (err) {
-      alert('Error registering user');
+      alert("Error registering user");
     }
   };
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post(`${apiBaseUrl}/api/users/login`, { username, password });
-      localStorage.setItem('token', response.data.token);
-      setIsLoggedIn(true);  // Set logged-in state
+      const response = await axios.post(`${apiBaseUrl}/api/users/login`, {
+        username,
+        password,
+      });
+      localStorage.setItem("token", response.data.token);
+      setIsLoggedIn(true); // Set logged-in state
     } catch (err) {
-      alert('Invalid credentials');
+      alert("Invalid credentials");
     }
   };
 
@@ -36,7 +48,9 @@ const App = () => {
           {!isLoggedIn ? (
             <div className="min-h-screen flex items-center justify-center bg-red-500">
               <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-lg">
-                <h2 className="text-3xl font-bold text-center text-gray-800">Login</h2>
+                <h2 className="text-3xl font-bold text-center text-gray-800">
+                  Login
+                </h2>
                 <input
                   type="text"
                   value={username}
@@ -72,14 +86,7 @@ const App = () => {
 
         <Route path="/capybara">
           {isLoggedIn ? (
-            <div>
-              <h1>Welcome!</h1>
-              <img
-                src="./capy.gif"  // Update this path to match the file location in `public`
-                alt="Capybara GIF"
-                style={{ width: '300px', height: '300px' }}
-              />
-            </div>
+            <CapybaraPage />
           ) : (
             <Redirect to="/" />
           )}
