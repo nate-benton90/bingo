@@ -16,7 +16,7 @@ app.use(cors({
 app.use(express.json()); // This line is essential for parsing JSON
 
 // Routes
-app.use('/api/users', userRoutes); // Ensure this matches the URL used in the frontend
+app.use('/api/users', userRoutes);
 
 const httpsOptions = {
   key: fs.readFileSync('certs/localhost.key'),
