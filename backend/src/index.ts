@@ -9,7 +9,7 @@ const port = 3000;
 
 // Middleware
 app.use(cors({
-  origin: 'https://localhost:3001', // Ensure this matches your frontend URL
+  origin: 'https://localhost', // Ensure this matches your frontend's domain
   credentials: true
 }));
 
