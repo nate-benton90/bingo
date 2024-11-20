@@ -1,18 +1,28 @@
+import https from 'https';
+import fs from 'fs';
 import express from 'express';
 import cors from 'cors';
-
 import userRoutes from './routes/userRoutes';
-
-// 
 
 const app = express();
 const port = 3000;
 
-app.use(cors());
-app.use(express.json());
+// Middleware
+app.use(cors({
+  origin: 'https://localhost:3001', // Ensure this matches your frontend URL
+  credentials: true
+}));
 
-app.use('/api/users', userRoutes);
+app.use(express.json()); // This line is essential for parsing JSON
 
-app.listen(port, () => {
+// Routes
+app.use('/api/users', userRoutes); // Ensure this matches the URL used in the frontend
+
+const httpsOptions = {
+  key: fs.readFileSync('certs/localhost.key'),
+  cert: fs.readFileSync('certs/localhost.crt')
+};
+
+https.createServer(httpsOptions, app).listen(port, () => {
   console.log(`Backend running on port ${port}`);
 });

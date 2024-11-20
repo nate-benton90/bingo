@@ -21,13 +21,18 @@ const App = () => {
       await axios.post(`${apiBaseUrl}/api/users/register`, {
         username,
         password,
+      }, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
       });
-      alert("Registered new user successfully");
-    } catch (err) {
+      alert("User registered successfully");
+    } catch (error) {
+      console.error("Error registering user:", error);
       alert("Error registering user");
     }
   };
-
+  
   const handleLogin = async () => {
     try {
       const response = await axios.post(`${apiBaseUrl}/api/users/login`, {
@@ -85,11 +90,7 @@ const App = () => {
         </Route>
 
         <Route path="/capybara">
-          {isLoggedIn ? (
-            <CapybaraPage />
-          ) : (
-            <Redirect to="/" />
-          )}
+          {isLoggedIn ? <CapybaraPage /> : <Redirect to="/" />}
         </Route>
 
         {/* Always redirect to "/" for any undefined route */}
