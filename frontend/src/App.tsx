@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import CapybaraPage from "./CapybaraPage"; // Corrected import path
+import CapybaraPage from "./CapybaraPage"; 
 import {
   BrowserRouter as Router,
   Route,

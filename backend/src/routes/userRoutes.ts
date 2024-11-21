@@ -4,13 +4,14 @@ import { registerUser, loginUser } from '../controllers/userController';
 const router = Router();
 
 router.post('/register', async (req, res) => {
-  console.log('Request received at /register with body:', req.body);  // Log request body
-
+  console.log('Incoming request:', req.body);
   try {
-    await registerUser(req, res);
-  } catch (err) {
-    console.error('Error in register route:', err);  // Log the error for debugging
-    res.status(500).send('Error registering user');
+    const result = await registerUser(req, res);
+    console.log('Registration successful:', result);
+    res.status(200).json(result);
+  } catch (error) {
+    console.error('Error during registration:', error);
+    res.status(500).send('Internal Server Error');
   }
 });
 

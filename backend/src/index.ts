@@ -5,22 +5,27 @@ import cors from 'cors';
 import userRoutes from './routes/userRoutes';
 
 const app = express();
-const port = 3000;
+const port = 3001;
 
 // Middleware
 app.use(cors({
-  origin: 'https://localhost', // Ensure this matches your frontend's domain
-  credentials: true
+  origin: ['https://localhost', 'http://localhost'], // Allow both HTTP and HTTPS
+  credentials: true, // Allow credentials (if needed)
 }));
 
-app.use(express.json()); // This line is essential for parsing JSON
+app.options('*', cors({
+  origin: ['https://localhost', 'http://localhost'],
+  credentials: true,
+}));
+
+app.use(express.json()); // Parse JSON payloads
 
 // Routes
 app.use('/api/users', userRoutes);
 
 const httpsOptions = {
   key: fs.readFileSync('certs/localhost.key'),
-  cert: fs.readFileSync('certs/localhost.crt')
+  cert: fs.readFileSync('certs/localhost.crt'),
 };
 
 https.createServer(httpsOptions, app).listen(port, () => {

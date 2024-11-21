@@ -25,9 +25,9 @@ export const registerUser = async (req: Request, res: Response) => {
 
   try {
     await pool.query('INSERT INTO users (username, password) VALUES ($1, $2)', [username, hashedPassword]);
-    res.status(201).send('User registered');
+    res.status(201).send('user registered');
   } catch (error) {
-    res.status(400).send('Error registering user');
+    res.status(400).send('error registering user');
   }
 };
 
