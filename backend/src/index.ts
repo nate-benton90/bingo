@@ -5,12 +5,17 @@ import userRoutes from './routes/userRoutes';
 const app = express();
 const port = 3001;
 
+// Middleware
+app.use(cors({
+    origin: 'https://localhost', // Adjust to match your frontend
+    credentials: true,
+}));
 app.use(express.json());
-app.use(cors({ origin: 'https://localhost:3001', credentials: true }));
-app.use(express.json()); // Required for JSON request bodies
 
-app.use('/api/users', userRoutes);
+// Routes
+app.use('/api/users', userRoutes); // Ensure this matches the Nginx config
 
+// Start the server
 app.listen(port, () => {
-  console.log(`backend running on port ${port}`);
+    console.log(`Backend running on port ${port}`);
 });
