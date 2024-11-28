@@ -12,8 +12,7 @@ app.use(cors({
 }));
 app.use(express.json());
 
-// Routes
-app.use('/api/users', userRoutes); // Ensure this matches the Nginx config
+app.use('/api/users', userRoutes);
 
 // Start the server
 app.listen(port, () => {
