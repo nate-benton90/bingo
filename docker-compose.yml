@@ -19,6 +19,8 @@ services:
       POSTGRES_DB: bloopdb
     depends_on:
       - db
+    volumes:
+      - ./certs:/app/certs
 
   db:
     image: postgres:13
@@ -40,7 +42,6 @@ services:
       - ./certs:/etc/nginx/certs
     ports:
       - "443:443"
-      - "80:80"
     depends_on:
       - frontend
       - backend

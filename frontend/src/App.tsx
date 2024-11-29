@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import CapybaraPage from "./CapybaraPage"; 
+import Chatroom from "./Chatroom";
 import {
   BrowserRouter as Router,
   Route,
@@ -51,9 +52,9 @@ const App = () => {
       <Switch>
         <Route path="/" exact>
           {!isLoggedIn ? (
-            <div className="min-h-screen flex items-center justify-center bg-red-500">
+            <div className="min-h-screen flex items-center justify-center bg-red-400">
               <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-lg">
-                <h2 className="text-3xl font-bold text-center text-gray-800">
+                <h2 className="text-3xl font-bold text-center text-gray-600">
                   Login
                 </h2>
                 <input
@@ -91,6 +92,10 @@ const App = () => {
 
         <Route path="/capybara">
           {isLoggedIn ? <CapybaraPage /> : <Redirect to="/" />}
+        </Route>
+        
+        <Route path="/chatroom">
+          {isLoggedIn ? <Chatroom /> : <Redirect to="/" />}
         </Route>
 
         {/* Always redirect to "/" for any undefined route */}

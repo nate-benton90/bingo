@@ -20,7 +20,7 @@ const CapybaraPage = () => {
       }}
     >
       <div className="text-center">
-        <h1 className="text-5xl font-bold text-gray-900 mb-8">The Capybara Sees You.</h1>
+        <h1 className="text-5xl font-bold text-blue-900 mb-8">The Capybara Sees You.</h1>
         <img
           src="./capy.gif" // Ensure this path is correct
           alt="Capybara"
