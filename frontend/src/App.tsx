@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import CapybaraPage from "./CapybaraPage"; 
+import DashboardPage from "./GDashboard";
 import {
   BrowserRouter as Router,
   Route,
@@ -91,6 +92,10 @@ const App = () => {
 
         <Route path="/capybara">
           {isLoggedIn ? <CapybaraPage /> : <Redirect to="/" />}
+        </Route>
+
+        <Route path="/gdashboard">
+          {isLoggedIn ? <DashboardPage /> : <Redirect to="/" />}
         </Route>
 
         {/* Always redirect to "/" for any undefined route */}
